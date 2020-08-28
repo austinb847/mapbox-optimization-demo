@@ -1,38 +1,87 @@
-.App {
-  text-align: center;
+.mapWrapper {
+  width: 100vw;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
+.truck {
+  margin: -10px -10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #3887be;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.info-box {
+  
+  width: 300px;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, .9);
+  padding: 15px;
+  text-align: left;
+  font-family: 'Arial';
+  margin: 0;
+  font-size: 13px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.geocoder-dropdown-item {
+  padding: 5px;
+}
+.geocoder-dropdown-icon {
+  margin-right: 10px;
+ 
+}
+  
+.geocoder-dropdown-text {
+  color: #5a3fc0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
 }
 
-.App-link {
-  color: #61dafb;
-}
+#marker {
+  background-image: url('/home_icon.png');
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+#college_icon {
+    background-image: url('/college_icon.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
   }
-  to {
-    transform: rotate(360deg);
+
+ #restaurant_icon {
+    background-image: url('/restaurant_icon.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
   }
-}
+   #hotel_icon {
+     background-image: url('/hotel_icon.png');
+     background-size: cover;
+     width: 30px;
+     height: 30px;
+     border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .map-overlay {
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+      
