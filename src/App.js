@@ -31,7 +31,8 @@ class App extends React.Component {
       accessToken: mapboxgl.accessToken,
       limit: 10,
 			countries: 'us',
-      placeholder: 'Enter City Here'
+      placeholder: 'Enter City Here',
+      zoom: 8
 			//mapboxgl: mapboxgl
 		});
     map.addControl(geocoder);
@@ -241,7 +242,25 @@ class App extends React.Component {
           </Button>
           <br/>
           <br/>
-          <div class="map-overlay">
+          <Button icon labelPosition='left' value='-86.5126,39.1754' name='college' onClick={(e) => this.addLocation(e, 'value')}>  
+            <Icon name='graduation cap' />
+            Indiana University
+          </Button>
+          <br/>
+          <br/>
+          <Button icon labelPosition='left' value='-86.529617,39.167554' name='restaurant' onClick={(e) => this.addLocation(e, 'value')}>
+            <Icon name='utensils' />
+            Restaurant
+          </Button>
+          <br/>
+          <br/>
+          <Button icon labelPosition='left' value='-86.535488,39.170568' name='hotel' onClick={(e) => this.addLocation(e, 'value')}>
+            <Icon name='hotel' />
+            Hotel
+          </Button>
+          <br/>
+          <br/>
+          <div className="map-overlay">
 						<h4 id="overview">Trip Duration:</h4>
           </div>
         </div>
