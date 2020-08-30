@@ -99,7 +99,7 @@ class App extends React.Component {
         const routeDuration = routeGeoJSON.trips[0].duration;
         console.log(routeDistance)
         console.log(routeDuration)
-        overviewText.innerText = `${(routeDistance / 1609.344 ).toFixed(1)} miles | ${(routeDuration / 60 * .0167).toFixed(0)} hours`;
+        overviewText.innerText = `${(routeDistance / 1609.344 ).toFixed(1) / 2} miles | ${(routeDuration / 60 * .0167).toFixed(0) / 2} hours`;
       };
 
       fetch(assembleQueryURL()).then((res) => res.json()).then((res) => {
