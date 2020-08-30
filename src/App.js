@@ -8,7 +8,6 @@ import { Button, Icon } from 'semantic-ui-react'
 // import collegeData from './data/colleges-4.json'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-//import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 
 
 
@@ -102,21 +101,7 @@ class App extends React.Component {
         overviewText.innerText = `${(routeDistance / 1609.344 ).toFixed(1)} miles | ${(routeDuration / 60 * .0167).toFixed(0)} hours`;
       };
 
-      const getDirections = function () {
-        let request = 'https://api.mapbox.com/directions/v5/';
-        request += 'mapbox/driving-traffic/';
-        request += startLocation.join(',') + ';' + location.join(',') 
-        request += '?access_token=' + mapboxgl.accessToken;
-        request += '&geometries=geojson';
-        request += '&overview=full,distance,duration';
-        // request += '?roundtrip=false';
-        console.log(request);
-      }
-
-     
-
       fetch(assembleQueryURL()).then((res) => res.json()).then((res) => {
-        console.log(res)
         let routeGeoJSON = turf.featureCollection([turf.feature(res.trips[0].geometry)]);
         // If there is no route provided, reset
         if (!res.trips[0]) {
@@ -124,37 +109,30 @@ class App extends React.Component {
         } else {
           // Update the `route` source by getting the route source
           // and setting the data equal to routeGeoJSON
-          map.getSource('route')
-            .setData(routeGeoJSON);
-            setOverview(res);
-            getDirections();
+          map.getSource('route').setData(routeGeoJSON);
+          setOverview(res);
         }
 
         if (res.waypoints.length === 12) {
           window.alert('Maximum number of points reached. Read more at docs.mapbox.com/api/navigation/#optimization.');
         }
-        
 			
 			});
     }
 
     function updateDropoffs(geojson) {
       map.getSource('dropoffs-symbol')
-        .setData(geojson);
-      
+        .setData(geojson);    
     }
 
-    
     function assembleQueryURL() {
-      let coords = [];
-
-      dropoffs.features.forEach(feature => {
-        coords.push(feature.geometry.coordinates)
-      })
-      console.log('https://api.mapbox.com/optimized-trips/v1/mapbox/driving/' + startLocation.join(',') + ';' + coords.join(';') + '?roundtrip=true&overview=full&steps=true&geometries=geojson&source=first&&access_token=' + mapboxgl.accessToken);
-      return 'https://api.mapbox.com/optimized-trips/v1/mapbox/driving/' + startLocation.join(',') + ';' + coords.join(';') + '?roundtrip=true&overview=full&steps=true&geometries=geojson&source=first&&access_token=' + mapboxgl.accessToken;
+      const coords = dropoffs.features.map(feature => feature.geometry.coordinates);
+      return 'https://api.mapbox.com/optimized-trips/v1/mapbox/driving/' + 
+              startLocation.join(',') + ';' + 
+              coords.join(';') + 
+              '?roundtrip=true&overview=full&steps=true&geometries=geojson&source=first&&access_token=' 
+              + mapboxgl.accessToken;
     }
-
 
     map.on('load', () => {
             
@@ -228,8 +206,6 @@ class App extends React.Component {
       }, 'waterway-label');
 
       this.addLocation = (el) => {
-        console.log(el.target.name);
-        // console.log(el.target.value.split(',').map(e => parseFloat(e)))
         let clickedLocation = {
           location: el.target.value.split(',').map(e => parseFloat(e)),
           btnClicked: el.target.name
@@ -252,26 +228,21 @@ class App extends React.Component {
             Northwestern University
           </Button>
           <br/>
-          <div class="map-overlay">
-						<h4 id="overview"></h4>
-          </div>
           <br/>
           <Button icon labelPosition='left' value='-87.681546, 42.046177' name='restaurant' onClick={(e) => this.addLocation(e, 'value')}>
             <Icon name='utensils' />
             Restaurant
           </Button>
           <br/>
-          <div class="map-overlay">
-						<h4 id="overview"></h4>
-          </div>
           <br/>
           <Button icon labelPosition='left' value='-87.680730, 42.048753' name='hotel' onClick={(e) => this.addLocation(e, 'value')}>
             <Icon name='hotel' />
             Hotel
           </Button>
           <br/>
+          <br/>
           <div class="map-overlay">
-						<h4 id="overview"></h4>
+						<h4 id="overview">Trip Duration:</h4>
           </div>
         </div>
       </React.Fragment>
