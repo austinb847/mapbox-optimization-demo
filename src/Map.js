@@ -1,17 +1,17 @@
 import * as React from 'react';
+import './Map.css';
 import {useState, useRef} from 'react';
 import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'
 import Geocoder from "react-map-gl-geocoder";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import Sidebar from './Sidebar';
 
 function Map() {
   const [viewport, setViewport] = useState({
-    latitude: 37.8,
-    longitude: -122.4,
-    zoom: 14,
-    bearing: 0,
-    pitch: 0
+    latitude: 37.0902,
+    longitude: -95.7129,
+    zoom: 3
   });
   const mapRef = useRef();
 
@@ -25,6 +25,7 @@ function Map() {
       onViewportChange={nextViewport => setViewport(nextViewport)}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
     >
+      <Sidebar/>
       <Geocoder
         {...viewport}
         mapRef={mapRef}
