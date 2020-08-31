@@ -17,7 +17,7 @@
   font-size: larger;
 }
 
-#marker {
+.start-location {
   background-image: url('/home_icon.png');
   background-size: cover;
   width: 30px;
